@@ -1,18 +1,26 @@
-## Getting Started
+# Battle of Red Cliffs
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+The program uses breadth-first search to find an optimal sequence: the fewest
+direct attacks required to destroy every warship.
 
-## Folder Structure
+## Input
 
-The workspace contains two folders by default, where:
+The first line contains `n m` (`1 <= n, m <= 6`). The next `n` lines contain
+`m` integers. `0` is an empty cell; `1..4` is a warship's health.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Example:
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+```text
+4 5
+0 3 0 0 2
+0 2 0 0 1
+1 1 2 0 2
+0 1 0 0 0
+```
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Run
 
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+```text
+javac -d bin src/*.java
+java -cp bin Main
+```

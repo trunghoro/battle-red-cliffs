@@ -1,11 +1,12 @@
+
 public class Main {
 
     public static void main(String[] args) {
 
         int[][] input = {
-            {1, 3, 0, 0, 2},
+            {0, 3, 0, 0, 2,},
             {0, 2, 0, 0, 1},
-            {4, 4, 2, 0, 2},
+            {1, 1, 2, 0, 2},
             {0, 1, 0, 0, 0}
         };
 
@@ -22,8 +23,9 @@ public class Main {
                 solver.solve(initialHp);
 
         System.out.println(
-                "Minimum attacks: "
-                + solution.size()
+                "Minimum attacks: ".concat(
+                        String.valueOf(solution.size())
+                )
         );
 
         for (int i = 0;
@@ -31,10 +33,9 @@ public class Main {
              i++) {
 
             System.out.println(
-                    "Attack "
-                    + (i + 1)
-                    + ": "
-                    + solution.get(i)
+                    "Attack ".concat(String.valueOf(i + 1))
+                            .concat(": ")
+                            .concat(solution.get(i).toString())
             );
         }
     }

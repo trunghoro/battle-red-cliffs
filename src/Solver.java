@@ -1,5 +1,6 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -15,14 +16,7 @@ public class Solver {
     }
 
     private String encode(byte[] hp) {
-
-        StringBuilder sb = new StringBuilder();
-
-        for (byte value : hp) {
-            sb.append(value);
-        }
-
-        return sb.toString();
+        return Arrays.toString(hp);
     }
 
     private List<Attack> reconstruct(
@@ -65,7 +59,7 @@ public class Solver {
         Set<String> visited = new HashSet<>();
 
         Node root = new Node(
-                initialHp,
+                initialHp.clone(),
                 -1,
                 -1
         );
