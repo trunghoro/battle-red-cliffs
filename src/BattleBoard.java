@@ -219,6 +219,9 @@ public class BattleBoard {
                 hp[target]--;
 
                 if (hp[target] == 0) {
+                    if (isDestroyed(hp)) {
+                        return;
+                    }
                     // A newly destroyed ship creates another explosion.
                     queue.offer(target);
                 }

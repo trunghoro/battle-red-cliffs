@@ -1,42 +1,37 @@
 # Battle of Red Cliffs
 
-Find one shortest attack sequence that destroys Cao Cao's fleet.
+Java program that finds one minimum-length attack sequence to destroy Cao
+Cao's fleet.
 
 ## Rules
 
-- Grid size: `1..6` rows and columns.
-- `0` is an empty cell; `1..4` is a ship's HP.
-- Each attack reduces one living ship's HP by `1`.
-- A ship reaching `0` HP explodes.
-- Fire spreads up, down, left, and right.
-- The first living ship in each direction loses `1` HP.
-- Destroyed ships can trigger a chain reaction.
+- The board is rectangular, with at most 6 rows and 6 columns.
+- `0` is an empty cell; `1..4` is a warship's HP.
+- Each direct attack reduces one living warship's HP by 1.
+- At 0 HP, the warship explodes and damages the first living warship by 1 in
+  each direction: up, down, left, and right.
+- A warship reduced to 0 HP by an explosion also explodes, continuing the chain
+  reaction.
+- Destroyed warships do not block fire.
 
-## Algorithm
+## Implementation
 
-`Solver` uses BFS to find one optimal sequence:
+- `BattleBoard`: validates the board and processes attacks and explosions.
+- `Solver`: uses BFS to find a shortest attack sequence.
+- `Node`: stores state and parent information.
+- `Attack`: stores an attacked position using one-based output coordinates.
+- `Main`: defines the sample board and prints the solution.
 
-- `byte[]` stores the compact HP state.
-- `Queue` stores states waiting to be searched.
-- `visited` removes duplicate states.
-- `Node` stores parent information for reconstruction.
-- BFS stops at the first goal, which guarantees the fewest attacks.
-
-`BattleBoard` handles attacks and explosion chains.
+Change the `input` matrix in `Main.java` to test another board.
 
 ## Run
 
-The sample board is defined in `Main.java`.
+Requires Java 17 or later. From the project root:
 
-```bash
-javac -d bin src/*.java
+```powershell
+javac -d bin src\*.java
 java -cp bin Main
 ```
 
-Example output:
-
-```text
-Minimum attacks: 2
-Attack 1: (1, 2)
-Attack 2: (3, 2)
-```
+> BFS guarantees a shortest solution but may require too much time or memory
+> for a dense 6-by-6 board because the state space grows exponentially.
