@@ -1,42 +1,41 @@
+import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
+        /**
+         * Creates the board, finds the shortest attack sequence, and prints it.
+         *
+         * @param args command-line arguments; not used by the program
+         */
+        public static void main(String[] args) {
 
-        int[][] input = {
-            {0, 3, 0, 0, 2,},
-            {0, 2, 0, 0, 1},
-            {1, 1, 2, 0, 2},
-            {0, 1, 0, 0, 0}
-        };
+                // A positive value represents a ship and its initial health.
+                int[][] input = {
+                        { 0, 3, 0, 0, 2 },
+                        { 0, 2, 0, 0, 1 },
+                        { 1, 1, 2, 0, 2 },
+                        { 0, 1, 0, 0, 0 }
+                };
 
-        BattleBoard board =
-                new BattleBoard(input);
+                // Convert the input matrix into the board representation.
+                BattleBoard board = new BattleBoard(input);
 
-        byte[] initialHp =
-                board.createInitialHp(input);
+                // Read the initial health values in internal ship-index order.
+                byte[] initialHp = board.createInitialHp();
 
-        Solver solver =
-                new Solver(board);
+                // Solver uses BFS to find the minimum number of attacks.
+                Solver solver = new Solver(board);
+                List<Attack> solution = solver.solve(initialHp);
 
-        var solution =
-                solver.solve(initialHp);
+                System.out.println(
+                                "Minimum attacks: ".concat(
+                                                String.valueOf(solution.size())));
 
-        System.out.println(
-                "Minimum attacks: ".concat(
-                        String.valueOf(solution.size())
-                )
-        );
-
-        for (int i = 0;
-             i < solution.size();
-             i++) {
-
-            System.out.println(
-                    "Attack ".concat(String.valueOf(i + 1))
-                            .concat(": ")
-                            .concat(solution.get(i).toString())
-            );
+                for (int i = 0; i < solution.size(); i++) {
+                        System.out.println(
+                                        "Attack ".concat(String.valueOf(i + 1))
+                                                        .concat(": ")
+                                                        .concat(solution.get(i).toString()));
+                }
         }
-    }
 }
