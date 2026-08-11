@@ -35,7 +35,8 @@ public class BattleBoard {
      */
     public Attack getAttack(int shipIndex) {
         if (shipIndex < 0 || shipIndex >= shipCount) {
-            throw new IllegalArgumentException("Invalid ship index: " + shipIndex);
+            throw new IllegalArgumentException(
+                    "Invalid ship index: ".concat(String.valueOf(shipIndex)));
         }
 
         return new Attack(
@@ -160,7 +161,8 @@ public class BattleBoard {
         validateHp(current);
 
         if (shipIndex < 0 || shipIndex >= shipCount) {
-            throw new IllegalArgumentException("Invalid ship index: " + shipIndex);
+            throw new IllegalArgumentException(
+                    "Invalid ship index: ".concat(String.valueOf(shipIndex)));
         }
 
         byte[] next = current.clone();
@@ -263,7 +265,7 @@ public class BattleBoard {
     private void validateHp(byte[] hp) {
         if (hp == null || hp.length != shipCount) {
             throw new IllegalArgumentException(
-                    "HP array length must be " + shipCount);
+                    "HP array length must be ".concat(String.valueOf(shipCount)));
         }
 
         for (byte value : hp) {
